@@ -1,0 +1,18 @@
+<form method="post" action="/new_post">
+  <h3> Author name:</h3>
+  <input type="text" name="author[name]">
+  <h3> Title:</h3>
+  <input type="text" name="post[title]">
+  <h3> Text:</h3>
+  <textarea rows="3" name="post[text]"> </textarea>
+  <input type="hidden" name="post[time]">
+  <br>
+  <br>Tag It!:<br>
+   <% Tag.all.each do |tag| %>
+     <input type="checkbox" name="post[tag_ids][]" value="<%= tag.id %>">
+     <%= tag.name %>
+     <br>
+   <% end %>
+     <br>
+  <button class="btn">Submit</button>
+</form>

@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <div class="span6 offset3">
+    <h1>Welcome to Stumblr!</h1>
+    <br>
+    <h3>The blog that is "just good enough"</h3>
+    <br>
+    <h4>Post feed</h4>
+    <% @posts.reverse_each do |post| %>
+     <hr
+      <h4><%= post.title %></h4>
+      <div class="well"><p><%= post.text %></p></div>
+      <br>
+
+      <p>Posted by: <% if !post.author.nil? %><%= post.author.name if post.author %> <% else %> Anonymous <% end %> on <%= post.time %></p>
+      <br> Tags: <%= post.list_of_tags %>
+      <% post.comments.each do |comment| %>
+      <p>Comment:<%= comment.text %> </p>
+      <br>By :<%= comment.author.name %>
+      <% end %>
+      <br>
+      <form method="post" action="/new_comment">
+        <input type="text" name="author[name]">
+        <textarea rows="3" name="comment[text]"> </textarea>
+        <input type="hidden" name="post[id]" value="<%= post.id %>">
+        <button class="btn">Submit</button>
+      </form>
+    <% end %>
+  </div>
+</div>
